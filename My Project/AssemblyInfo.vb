@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Проверьте значения атрибутов сборки
 
-<Assembly: AssemblyTitle("covertXmlToCsv")>
+<Assembly: AssemblyTitle("convertXmlToCsv")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("covertXmlToCsv")>
+<Assembly: AssemblyProduct("convertXmlToCsv")>
 <Assembly: AssemblyCopyright("Copyright ©  2021")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-<Assembly: Guid("291fddb0-0f51-4ec0-88a5-28e9b1e41f21")>
+<Assembly: Guid("3d20b459-e55d-4765-b6d0-692e301802c2")>
 
 ' Сведения о версии сборки состоят из следующих четырех значений:
 '
