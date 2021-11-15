@@ -11,7 +11,7 @@ Module MainModule
 			Return
 		End If
 		Dim inputFile As String = cargs(0)
-		'inputFile = "data.xml"
+		'Dim inputFile As String = "data_null.xml"
 
 		Dim xDoc As New XmlDocument()
 		xDoc.Load(inputFile)
@@ -20,22 +20,37 @@ Module MainModule
 			Console.WriteLine("Cannot find root element")
 			Return
 		End If
-		Dim row As New List(Of String)
 		Dim sw As New IO.StreamWriter(IO.Path.Combine(IO.Path.GetPathRoot(inputFile), IO.Path.GetFileNameWithoutExtension(inputFile) & ".csv"))
 
-		For Each x1 As XmlElement In xRoot
-			For Each x2 As XmlElement In x1
-				row.Add(x2.Name)
-			Next
-			Exit For
-		Next
-		sw.WriteLine(String.Join(";", row))
+		'Поиск заголовков
+		Dim maxLength As Integer = -1
+		Dim headers() As String = Nothing
+		Dim rowHeaders As New List(Of String)
 		For Each xRow As XmlElement In xRoot
-			row.Clear()
+			rowHeaders.Clear()
 			For Each xFiled As XmlElement In xRow
-				row.Add(xFiled.InnerText)
+				rowHeaders.Add(xFiled.Name)
 			Next
-			sw.WriteLine(String.Join(";", row))
+			If rowHeaders.Count > maxLength Then
+				ReDim headers(rowHeaders.Count - 1)
+				rowHeaders.CopyTo(headers)
+			End If
+		Next
+		sw.WriteLine(String.Join(";", headers))
+
+		'Console.WriteLine("Headers: ")
+		'For i As Integer = 0 To headers.Length - 1
+		'	Console.WriteLine(headers(i))
+		'Next
+		'Console.ReadLine()
+
+		Dim rowData(headers.Length - 1) As String
+		For Each xRow As XmlElement In xRoot
+			For i As Integer = 0 To headers.Length - 1
+				Dim data As String = If(xRow(headers(i)) Is Nothing, "", xRow(headers(i)).InnerText)
+				rowData(i) = data
+			Next
+			sw.WriteLine(String.Join(";", rowData))
 		Next
 		sw.Flush()
 		sw.Close()
