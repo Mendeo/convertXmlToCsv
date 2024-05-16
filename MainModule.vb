@@ -36,7 +36,7 @@ Module MainModule
 				rowHeaders.CopyTo(headers)
 			End If
 		Next
-		sw.WriteLine(String.Join(";", headers))
+		sw.WriteLine(String.Join(",", headers))
 
 		'Console.WriteLine("Headers: ")
 		'For i As Integer = 0 To headers.Length - 1
@@ -50,7 +50,7 @@ Module MainModule
 				Dim data As String = If(xRow(headers(i)) Is Nothing, "", xRow(headers(i)).InnerText)
 				rowData(i) = data
 			Next
-			sw.WriteLine(String.Join(";", rowData))
+			sw.WriteLine(String.Join(",", rowData))
 		Next
 		sw.Flush()
 		sw.Close()
