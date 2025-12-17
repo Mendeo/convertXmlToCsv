@@ -20,7 +20,7 @@ Module MainModule
 			Console.WriteLine("Cannot find root element")
 			Return
 		End If
-		Dim sw As New IO.StreamWriter(IO.Path.Combine(IO.Path.GetPathRoot(inputFile), IO.Path.GetFileNameWithoutExtension(inputFile) & ".csv"))
+		Dim sw As New IO.StreamWriter(IO.Path.Combine(IO.Path.GetDirectoryName(inputFile), IO.Path.GetFileNameWithoutExtension(inputFile) & ".csv"))
 
 		'Поиск заголовков
 		Dim maxLength As Integer = -1
@@ -34,6 +34,7 @@ Module MainModule
 			If rowHeaders.Count > maxLength Then
 				ReDim headers(rowHeaders.Count - 1)
 				rowHeaders.CopyTo(headers)
+				maxLength = rowHeaders.Count
 			End If
 		Next
 		sw.WriteLine(String.Join(",", headers))
